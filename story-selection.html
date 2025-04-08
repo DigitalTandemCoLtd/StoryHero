@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StoryHero - Choose a Story</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
+  <style>
+    body {
+      font-family: 'Nunito', sans-serif;
+    }
+    .hero-gradient {
+      background: linear-gradient(90deg, #6366f1 0%, #8b5cf6 100%);
+    }
+    
+    /* Progress bar styles */
+    .progress-container {
+      width: 100%;
+      position: relative;
+    }
+    .progress-bar {
+      height: 8px;
+      background-color: #e5e7eb;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background-color: #6366f1;
+      width: 75%; /* 3rd step of 4 */
+      transition: width 0.3s ease-in-out;
+    }
+    .progress-steps {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 8px;
+    }
+    .progress-step {
+      font-size: 0.75rem;
+      color: #9ca3af;
+    }
+    .progress-step.active {
+      color: #6366f1;
+      font-weight: 600;
+    }
+    
+    /* Story card styles */
+    .story-card {
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+    }
+    .story-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+    .story-card.selected {
+      border-color: #6366f1;
+    }
+    
+    /* Swiper custom styles */
+    .swiper {
+      width: 100%;
+      padding-bottom: 40px;
+    }
+    .swiper-slide {
+      height: auto;
+    }
+    .swiper-pagination-bullet-active {
+      background-color: #6366f1;
+    }
+    
+    /* Limited time offer badge */
+    .limited-badge {
+      background: linear-gradient(135deg, #ef4444 0%, #f59e0b 100%);
+      animation: pulse 1.5s infinite;
+    }
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+      }
+      70% {
+        box-shadow: 0 0 0 10px rgba(239, 68, 68, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+      }
+    }
+  </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+  <!-- Header with progress -->
+  <header class="bg-white shadow">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16">
+        <div class="flex">
+          <div class="flex-shrink-0 flex items-center">
+            <a href="index.html" class="text-indigo-600 font-bold text-xl">StoryHero</a>
+          </div>
+        </div>
+        <div class="hidden sm:ml-6 sm:flex sm:items-center space-x-4">
+          <button class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700">
+            Save Progress
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Progress bar -->
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+    <div class="progress-container">
+      <div class="progress-bar">
+        <div class="progress-fill"></div>
+      </div>
+      <div class="progress-steps">
+        <div class="progress-step">Child Info</div>
+        <div class="progress-step">Photos</div>
+        <div class="progress-step active">Story</div>
+        <div class="progress-step">Preview</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="text-center mb-8">
+      <h1 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">Choose <span class="text-indigo-600">Alex's</span> Adventure</h1>
+      <p class="mt-3 max-w-2xl mx-auto text-xl text-gray-500 sm:mt-4">
+        Select the perfect story where Alex will be the hero!
+      </p>
+    </div>
+
+    <!-- Mobile Story Selection (Swiper) -->
+    <div class="md:hidden">
+      <p class="text-sm text-gray-500 mb-2">Swipe left or right to explore all stories</p>
+      <div class="swiper">
+        <div class="swiper-wrapper">
+          <!-- Story 1 -->
+          <div class="swiper-slide">
+            <div class="story-card bg-white rounded-lg overflow-hidden shadow">
+              <div class="relative">
+                <img src="https://images.unsplash.com/photo-1604537466158-719b1972feb8?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Space Explorer" class="w-full h-48 object-cover">
+                <div class="absolute top-0 right-0 mt-2 mr-2 limited-badge px-2 py-1 rounded text-xs font-bold text-white">
+                  LIMITED TIME!
+                </div>
+                <div class="absolute bottom-0 left-0 p-2">
+                  <span class="inline-block bg-indigo-600 rounded-full px-3 py-1 text-xs font-semibold text-white mr-2">
+                    Ages 3-8
+                  </span>
+                </div>
+              </div>
+              <div class="p-4">
+                <h3 class="text-lg font-bold text-gray-900">Space Explorer</h3>
+                <p class="mt-1 text-sm text-gray-500 h-20 overflow-hidden">
+                  Alex will embark on an intergalactic journey, discovering planets and making friends with aliens throughout the universe!
+                </p>
+                <div class="mt-4 flex">
+                  <span class="text-sm text-gray-600 inline-flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-yellow-400 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                    4.9 (256 reviews)
+                  </span>
+                  <span class="ml-auto text-xs text-indigo-600 font-semibold">Most Popular</span>
+                </div>
+                <button class="mt-4 w-full text-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                  Choose This Story
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Story 2 -->
+          <div class="swiper-slide">
+            <div class="story-card bg-white rounded-lg overflow-hidden shadow">
+              <div class="relative">
+                <img src="https://images.unsplash.com/photo-1596496181871-9681eacf9764?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Superhero" class="w-full h-48 object-cover">
+                <div class="absolute bottom-0 left-0 p-2">
+                  <span class="inline-block bg-indigo-600 rounded-full px-3 py-1 text-xs font-semibold text-white mr-2">
+                    Ages 4-8
+                  </span>
+                </div>
+              </div>
+              <div class="p-4">
+                <h3 class="text-lg font-bold text-gray-900">Superhero</h3>
+                <p class="mt-1 text-sm text-gray-500 h-20 overflow-hidden">
+                  Alex discovers special powers and learns to use them to help others and save the day in this exciting adventure!
+                </p>
+                <div class="mt-4 flex">
+                  <span class="text-sm text-gray-600 inline-flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-yellow-400 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                    4.8 (189 reviews)
+                  </span>
+                </div>
+                <button class="mt-4 w-full text-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                  Choose This Story
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Story 3 -->
+          <div class="swiper-slide">
+            <div class="story-card bg-white rounded-lg overflow-hidden shadow">
+              <div class="relative">
+                <img src="https://images.unsplash.com/photo-1504185945330-7a3ca1380535?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Jungle Explorer" class="w-full h-48 object-cover">
+                <div class="absolute bottom-0 left-0 p-2">
+                  <span class="inline-block bg-indigo-600 rounded-full px-3 py-1 text-xs font-semibold text-white mr-2">
+                    Ages 3-6
+                  </span>
+                </div>
+              </div>
+              <div class="p-4">
+                <h3 class="text-lg font-bold text-gray-900">Jungle Explorer</h3>
+                <p class="mt-1 text-sm text-gray-500 h-20 overflow-hidden">
+                  Alex ventures deep into the jungle, discovering amazing animals and hidden treasures in this wild adventure!
+                </p>
+                <div class="mt-4 flex">
+                  <span class="text-sm text-gray-600 inline-flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-yellow-400 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                    4.7 (142 reviews)
+                  </span>
+                </div>
+                <button class="mt-4 w-full text-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                  Choose This Story
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Story 4 -->
+          <div class="swiper-slide">
+            <div class="story-card bg-white rounded-lg overflow-hidden shadow">
+              <div class="relative">
+                <img src="https://images.unsplash.com/photo-1551244072-5d12893278ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Undersea Adventure" class="w-full h-48 object-cover">
+                <div class="absolute bottom-0 left-0 p-2">
+                  <span class="inline-block bg-indigo-600 rounded-full px-3 py-1 text-xs font-semibold text-white mr-2">
+                    Ages 3-7
+                  </span>
+                </div>
+              </div>
+              <div class="p-4">
+                <h3 class="text-lg font-bold text-gray-900">Undersea Adventure</h3>
+                <p class="mt-1 text-sm text-gray-500 h-20 overflow-hidden">
+                  Alex dives deep under the ocean to explore coral reefs, discover sunken treasures, and make friends with sea creatures!
+                </p>
+                <div class="mt-4 flex">
+                  <span class="text-sm text-gray-600 inline-flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-yellow-400 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                    4.6 (118 reviews)
+                  </span>
+                </div>
+                <button class="mt-4 w-full text-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                  Choose This Story
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Pagination -->
+        <div class="swiper-pagination"></div>
+      </div>
+    </div>
+
+    <!-- Desktop Story Grid -->
+    <div class="hidden md:block">
+      <div class="grid grid-cols-2 gap-6 lg:grid-cols-4">
+        <!-- Story 1 -->
+        <div class="story-card bg-white rounded-lg overflow-hidden shadow">
+          <div class="relative">
+            <img src="https://images.unsplash.com/photo-1604537466158-719b1972feb8?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Space Explorer" class="w-full h-48 object-cover">
+            <div class="absolute top-0 right-0 mt-2 mr-2 limited-badge px-2 py-1 rounded text-xs font-bold text-white">
+              LIMITED TIME!
+            </div>
+            <div class="absolute bottom-0 left-0 p-2">
+              <span class="inline-block bg-indigo-600 rounded-full px-3 py-1 text-xs font-semibold text-white mr-2">
+                Ages 3-8
+              </span>
+            </div>
+          </div>
+          <div class="p-4">
+            <h3 class="text-lg font-bold text-gray-900">Space Explorer</h3>
+            <p class="mt-1 text-sm text-gray-500 h-20 overflow-hidden">
+              Alex will embark on an intergalactic journey, discovering planets and making friends with aliens throughout the universe!
+            </p>
+            <div class="mt-4 flex">
+              <span class="text-sm text-gray-600 inline-flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-yellow-400 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+                4.9 (256 reviews)
+              </span>
+              <span class="ml-auto text-xs text-indigo-600 font-semibold">Most Popular</span>
+            </div>
+            <button class="mt-4 w-full text-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+              Choose This Story
+            </button>
+          </div>
+        </div>
+        
+        <!-- Story 2 -->
+        <div class="story-card bg-white rounded-lg overflow-hidden shadow">
+          <div class="relative">
+            <img src="https://images.unsplash.com/photo-1596496181871-9681eacf9764?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Superhero" class="w-full h-48 object-cover">
+            <div class="absolute bottom-0 left-0 p-2">
+              <span class="inline-block bg-indigo-600 rounded-full px-3 py-1 text-xs font-semibold text-white mr-2">
+                Ages 4-8
+              </span>
+            </div>
+          </div>
+          <div class="p-4">
+            <h3 class="text-lg font-bold text-gray-900">Superhero</h3>
+            <p class="mt-1 text-sm text-gray-500 h-20 overflow-hidden">
+              Alex discovers special powers and learns to use them to help others and save the day in this exciting adventure!
+            </p>
+            <div class="mt-4 flex">
+              <span class="text-sm text-gray-600 inline-flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-yellow-400 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+                4.8 (189 reviews)
+              </span>
+            </div>
+            <button class="mt-4 w-full text-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+              Choose This Story
+            </button>
+          </div>
+        </div>
+        
+        <!-- Story 3 -->
+        <div class="story-card bg-white rounded-lg overflow-hidden shadow">
+          <div class="relative">
+            <img src="https://images.unsplash.com/photo-1504185945330-7a3ca1380535?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Jungle Explorer" class="w-full h-48 object-cover">
+            <div class="absolute bottom-0 left-0 p-2">
+              <span class="inline-block bg-indigo-600 rounded-full px-3 py-1 text-xs font-semibold text-white mr-2">
+                Ages 3-6
+              </span>
+            </div>
+          </div>
+          <div class="p-4">
+            <h3 class="text-lg font-bold text-gray-900">Jungle Explorer</h3>
+            <p class="mt-1 text-sm text-gray-500 h-20 overflow-hidden">
+              Alex ventures deep into the jungle, discovering amazing animals and hidden treasures in this wild adventure!
+            </p>
+            <div class="mt-4 flex">
+              <span class="text-sm text-gray-600 inline-flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-yellow-400 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+                4.7 (142 reviews)
+              </span>
+            </div>
+            <button class="mt-4 w-full text-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+              Choose This Story
+            </button>
+          </div>
+        </div>
+        
+        <!-- Story 4 -->
+        <div class="story-card bg-white rounded-lg overflow-hidden shadow">
+          <div class="relative">
+            <img src="https://images.unsplash.com/photo-1551244072-5d12893278ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Undersea Adventure" class="w-full h-48 object-cover">
+            <div class="absolute bottom-0 left-0 p-2">
+              <span class="inline-block bg-indigo-600 rounded-full px-3 py-1 text-xs font-semibold text-white mr-2">
+                Ages 3-7
+              </span>
+            </div>
+          </div>
+          <div class="p-4">
+            <h3 class="text-lg font-bold text-gray-900">Undersea Adventure</h3>
+            <p class="mt-1 text-sm text-gray-500 h-20 overflow-hidden">
+              Alex dives deep under the ocean to explore coral reefs, discover sunken treasures, and make friends with sea creatures!
+            </p>
+            <div class="mt-4 flex">
+              <span class="text-sm text-gray-600 inline-flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-yellow-400 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+                4.6 (118 reviews)
+              </span>
+            </div>
+            <button class="mt-4 w-full text-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+              Choose This Story
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Story Preview Section -->
+    <div class="mt-12">
+      <h2 class="text-2xl font-bold text-gray-900">Selected Story Preview</h2>
+      <p class="mt-2 text-gray-500">
+        Here's how Alex will appear in the Space Explorer adventure:
+      </p>
+      
+      <div class="mt-6 bg-white rounded-lg shadow overflow-hidden">
+        <div class="md:flex">
+          <div class="md:flex-shrink-0">
+            <img class="h-full w-full object-cover md:w-60" src="https://images.unsplash.com/photo-1581822261290-991b38693d1b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Preview cover">
+          </div>
+          <div class="p-8">
+            <div class="uppercase tracking-wide text-sm text-indigo-600 font-semibold">Book Preview</div>
+            <h3 class="mt-1 text-xl font-bold text-gray-900">Alex's Space Adventure</h3>
+            <p class="mt-2 text-gray-500">
+              In this story, Alex will blast off into space aboard the Starship Explorer. Using the photos you've uploaded, we'll show Alex:
+            </p>
+            <ul class="mt-3 text-gray-500 list-disc list-inside">
+              <li>Meeting friendly aliens on distant planets</li>
+              <li>Discovering strange new worlds</li>
+              <li>Piloting a spaceship through an asteroid field</li>
+              <li>Saving an alien civilization from a cosmic disaster</li>
+            </ul>
+            
+            <div class="mt-6 flex items-center">
+              <div class="flex-shrink-0">
+                <div class="relative h-16 w-16 rounded-full border-2 border-indigo-200 overflow-hidden">
+                  <img src="https://images.unsplash.com/photo-1545558014-8692077e9b5c?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80" alt="Alex" class="h-full w-full object-cover">
+                </div>
+              </div>
+              <div class="ml-4">
+                <div class="text-sm font-medium text-gray-900">Alex will be the hero!</div>
+                <div class="text-sm text-gray-500">
+                  This story teaches bravery, friendship, and exploration.
+                </div>
+              </div>
+            </div>
+            
+            <div class="mt-6">
+              <button type="button" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                Continue with This Story
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Recommendations -->
+    <div class="mt-12">
+      <h2 class="text-lg font-medium text-gray-900">Other children love these stories</h2>
+      <div class="mt-4 bg-gray-50 rounded-lg p-4 border border-gray-200">
+        <div class="flex items-center space-x-4">
+          <div class="flex-shrink-0">
+            <div class="flex -space-x-2">
+              <img class="inline-block h-10 w-10 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" alt="">
+              <img class="inline-block h-10 w-10 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" alt="">
+              <img class="inline-block h-10 w-10 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" alt="">
+            </div>
+          </div>
+          <div>
+            <p class="text-sm text-gray-600">
+              <span class="font-medium text-gray-900">87% of children</span> choose Space Explorer as their first adventure!
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white mt-12">
+    <div class="max-w-7xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
+      <p class="text-center text-base text-gray-400">
+        &copy; 2025 StoryHero. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    // Initialize Swiper for mobile story carousel
+    const swiper = new Swiper('.swiper', {
+      slidesPerView: 1,
+      spaceBetween: 20,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      breakpoints: {
+        // For small mobile screens
+        400: {
+          slidesPerView: 1.2,
+        }
+      }
+    });
+    
+    // Handle story card selection
+    document.querySelectorAll('.story-card').forEach(card => {
+      card.addEventListener('click', function() {
+        // Remove selected class from all cards
+        document.querySelectorAll('.story-card').forEach(c => {
+          c.classList.remove('selected');
+        });
+        
+        // Add selected class to clicked card
+        this.classList.add('selected');
+        
+        // Scroll to preview section on mobile
+        const previewSection = document.querySelector('.mt-12');
+        if (window.innerWidth < 768) {
+          setTimeout(() => {
+            previewSection.scrollIntoView({ behavior: 'smooth' });
+          }, 300);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
