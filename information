@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StoryHero - About Your Child</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Nunito', sans-serif;
+    }
+    .hero-gradient {
+      background: linear-gradient(90deg, #6366f1 0%, #8b5cf6 100%);
+    }
+    .avatar-option {
+      transition: all 0.2s ease-in-out;
+      cursor: pointer;
+    }
+    .avatar-option:hover {
+      transform: scale(1.05);
+    }
+    .avatar-option.selected {
+      border: 3px solid #6366f1;
+    }
+    
+    /* Progress bar styles */
+    .progress-container {
+      width: 100%;
+      position: relative;
+    }
+    .progress-bar {
+      height: 8px;
+      background-color: #e5e7eb;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background-color: #6366f1;
+      width: 25%;
+      transition: width 0.3s ease-in-out;
+    }
+    .progress-steps {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 8px;
+    }
+    .progress-step {
+      font-size: 0.75rem;
+      color: #9ca3af;
+    }
+    .progress-step.active {
+      color: #6366f1;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+  <!-- Header with progress -->
+  <header class="bg-white shadow">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16">
+        <div class="flex">
+          <div class="flex-shrink-0 flex items-center">
+            <a href="index.html" class="text-indigo-600 font-bold text-xl">StoryHero</a>
+          </div>
+        </div>
+        <div class="hidden sm:ml-6 sm:flex sm:items-center space-x-4">
+          <button class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700">
+            Save Progress
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Progress bar -->
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+    <div class="progress-container">
+      <div class="progress-bar">
+        <div class="progress-fill"></div>
+      </div>
+      <div class="progress-steps">
+        <div class="progress-step active">Child Info</div>
+        <div class="progress-step">Photos</div>
+        <div class="progress-step">Story</div>
+        <div class="progress-step">Preview</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <main class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+      <div class="px-4 py-5 sm:px-6">
+        <h1 class="text-2xl leading-6 font-bold text-gray-900">About Your Child</h1>
+        <p class="mt-1 max-w-2xl text-sm text-gray-500">Let's personalize a story for your little one!</p>
+      </div>
+
+      <div class="border-t border-gray-200 px-4 py-5 sm:p-6">
+        <form>
+          <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+            <div class="sm:col-span-3">
+              <label for="child_name" class="block text-sm font-medium text-gray-700">Child's First Name</label>
+              <div class="mt-1">
+                <input type="text" name="child_name" id="child_name" autocomplete="given-name" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md p-2 border">
+              </div>
+            </div>
+
+            <div class="sm:col-span-3">
+              <label for="age_group" class="block text-sm font-medium text-gray-700">Age Group</label>
+              <div class="mt-1">
+                <select id="age_group" name="age_group" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md p-2 border">
+                  <option value="" disabled selected>Select age range</option>
+                  <option value="3-5">3-5 years</option>
+                  <option value="6-8">6-8 years</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="sm:col-span-6">
+              <label for="pronoun" class="block text-sm font-medium text-gray-700">Preferred Pronouns</label>
+              <div class="mt-1 flex space-x-4">
+                <div class="flex items-center">
+                  <input id="pronoun_he" name="pronoun" type="radio" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300">
+                  <label for="pronoun_he" class="ml-2 block text-sm text-gray-700">He/Him</label>
+                </div>
+                <div class="flex items-center">
+                  <input id="pronoun_she" name="pronoun" type="radio" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300">
+                  <label for="pronoun_she" class="ml-2 block text-sm text-gray-700">She/Her</label>
+                </div>
+                <div class="flex items-center">
+                  <input id="pronoun_they" name="pronoun" type="radio" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300">
+                  <label for="pronoun_they" class="ml-2 block text-sm text-gray-700">They/Them</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Avatar Creator Section -->
+          <div class="mt-8">
+            <h2 class="text-lg font-medium text-gray-900">Create Your Child's Avatar</h2>
+            <p class="mt-1 text-sm text-gray-500">This will help us personalize the story. You can change it later when you upload photos.</p>
+            
+            <div class="mt-4">
+              <h3 class="text-sm font-medium text-gray-700">Hair Style</h3>
+              <div class="mt-2 grid grid-cols-2 gap-4 sm:grid-cols-4">
+                <div class="avatar-option rounded-lg p-2 bg-gray-50">
+                  <img src="https://via.placeholder.com/100?text=Hair+1" alt="Hair style 1" class="w-full h-auto rounded">
+                </div>
+                <div class="avatar-option rounded-lg p-2 bg-gray-50">
+                  <img src="https://via.placeholder.com/100?text=Hair+2" alt="Hair style 2" class="w-full h-auto rounded">
+                </div>
+                <div class="avatar-option rounded-lg p-2 bg-gray-50">
+                  <img src="https://via.placeholder.com/100?text=Hair+3" alt="Hair style 3" class="w-full h-auto rounded">
+                </div>
+                <div class="avatar-option rounded-lg p-2 bg-gray-50">
+                  <img src="https://via.placeholder.com/100?text=Hair+4" alt="Hair style 4" class="w-full h-auto rounded">
+                </div>
+              </div>
+            </div>
+            
+            <div class="mt-4">
+              <h3 class="text-sm font-medium text-gray-700">Hair Color</h3>
+              <div class="mt-2 flex flex-wrap gap-2">
+                <div class="w-8 h-8 rounded-full bg-yellow-300 cursor-pointer border-2 border-transparent hover:border-gray-400"></div>
+                <div class="w-8 h-8 rounded-full bg-amber-700 cursor-pointer border-2 border-transparent hover:border-gray-400"></div>
+                <div class="w-8 h-8 rounded-full bg-red-500 cursor-pointer border-2 border-transparent hover:border-gray-400"></div>
+                <div class="w-8 h-8 rounded-full bg-black cursor-pointer border-2 border-transparent hover:border-gray-400"></div>
+                <div class="w-8 h-8 rounded-full bg-gray-400 cursor-pointer border-2 border-transparent hover:border-gray-400"></div>
+              </div>
+            </div>
+            
+            <div class="mt-4">
+              <h3 class="text-sm font-medium text-gray-700">Skin Tone</h3>
+              <div class="mt-2 flex flex-wrap gap-2">
+                <div class="w-8 h-8 rounded-full bg-amber-50 cursor-pointer border-2 border-transparent hover:border-gray-400"></div>
+                <div class="w-8 h-8 rounded-full bg-amber-200 cursor-pointer border-2 border-transparent hover:border-gray-400"></div>
+                <div class="w-8 h-8 rounded-full bg-amber-300 cursor-pointer border-2 border-transparent hover:border-gray-400"></div>
+                <div class="w-8 h-8 rounded-full bg-amber-500 cursor-pointer border-2 border-transparent hover:border-gray-400"></div>
+                <div class="w-8 h-8 rounded-full bg-amber-800 cursor-pointer border-2 border-transparent hover:border-gray-400"></div>
+                <div class="w-8 h-8 rounded-full bg-amber-950 cursor-pointer border-2 border-transparent hover:border-gray-400"></div>
+              </div>
+            </div>
+            
+            <div class="mt-4">
+              <h3 class="text-sm font-medium text-gray-700">Avatar Preview</h3>
+              <div class="mt-2 flex justify-center">
+                <div class="w-32 h-32 rounded-full bg-gray-100 flex items-center justify-center border-2 border-indigo-200">
+                  <img src="https://via.placeholder.com/120?text=Avatar" alt="Avatar preview" class="rounded-full">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Favorites Section (Optional) -->
+          <div class="mt-8">
+            <h2 class="text-lg font-medium text-gray-900">Child's Favorites (Optional)</h2>
+            <p class="mt-1 text-sm text-gray-500">Help us personalize the story with your child's favorite things</p>
+            
+            <div class="mt-4 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+              <div class="sm:col-span-3">
+                <label for="favorite_animal" class="block text-sm font-medium text-gray-700">Favorite Animal</label>
+                <div class="mt-1">
+                  <input type="text" name="favorite_animal" id="favorite_animal" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md p-2 border" placeholder="e.g., Elephant">
+                </div>
+              </div>
+
+              <div class="sm:col-span-3">
+                <label for="favorite_color" class="block text-sm font-medium text-gray-700">Favorite Color</label>
+                <div class="mt-1">
+                  <input type="text" name="favorite_color" id="favorite_color" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md p-2 border" placeholder="e.g., Purple">
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+        
+        <!-- Sample Preview -->
+        <div class="mt-8 bg-gray-50 p-4 rounded-lg border border-gray-200">
+          <h3 class="text-sm font-medium text-gray-700">Here's how personalization works:</h3>
+          <div class="mt-2 flex flex-col sm:flex-row items-center">
+            <img src="https://via.placeholder.com/150?text=Example" alt="Example preview" class="mb-4 sm:mb-0 sm:mr-4 rounded">
+            <div>
+              <p class="text-sm text-gray-600">This is how <span class="font-bold text-indigo-600">[Child's Name]</span> will appear in the story. Their name will be used throughout the narrative, and their avatar characteristics will influence the illustrations.</p>
+              <p class="mt-2 text-sm text-gray-600">When you upload photos in the next step, we'll integrate them directly into the story pages!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="px-4 py-3 bg-gray-50 text-right sm:px-6 flex justify-between">
+        <div>
+          <button type="button" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            Save For Later
+          </button>
+        </div>
+        <div>
+          <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            Continue to Photo Upload
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white mt-12">
+    <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+      <p class="text-center text-sm text-gray-500">
+        &copy; 2025 StoryHero, Inc. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    // Simple script to handle avatar option selection
+    document.querySelectorAll('.avatar-option').forEach(option => {
+      option.addEventListener('click', function() {
+        // Remove selected class from all options in the same category
+        const parent = this.parentElement;
+        parent.querySelectorAll('.avatar-option').forEach(opt => {
+          opt.classList.remove('selected');
+        });
+        
+        // Add selected class to clicked option
+        this.classList.add('selected');
+      });
+    });
+
+    // Color selection
+    document.querySelectorAll('.w-8.h-8.rounded-full').forEach(color => {
+      color.addEventListener('click', function() {
+        // Remove border from all colors in the same category
+        const parent = this.parentElement;
+        parent.querySelectorAll('.w-8.h-8.rounded-full').forEach(c => {
+          c.classList.remove('border-gray-400');
+          c.classList.add('border-transparent');
+        });
+        
+        // Add border to selected color
+        this.classList.remove('border-transparent');
+        this.classList.add('border-gray-400');
+      });
+    });
+
+    // Auto-populate example with child's name
+    const childNameInput = document.getElementById('child_name');
+    childNameInput.addEventListener('input', function() {
+      const nameSpans = document.querySelectorAll('span.font-bold.text-indigo-600');
+      nameSpans.forEach(span => {
+        span.textContent = this.value || "[Child's Name]";
+      });
+    });
+  </script>
+</body>
+</html>
